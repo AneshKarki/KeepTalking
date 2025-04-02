@@ -1,0 +1,29 @@
+.NavBarDiv {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  padding: 10px 60px;
+  background-color: black;
+  height: 13vh;
+  font-size: 32px;
+  color: white;
+}
+.NavBarDiv div a {
+  text-decoration: none;
+  color: white;
+  font-size: 32px;
+  font-weight: bold;
+  transition: color 0.3s ease;
+}
+.NavBarDiv div a:hover {
+  color: red;
+  transition: color 0.3s ease;
+}
+.NavBarDiv div:hover {
+  cursor: pointer;
+  background-color: #444;
+  border-radius: 5px;
+  padding: 5px 10px;
+  transition: background-color 0.3s ease;
+  color: red;
+}
