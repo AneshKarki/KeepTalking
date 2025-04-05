@@ -1,5 +1,6 @@
 import React, { useState } from "react";
 import { Link, useNavigate } from "react-router-dom";
+import axios from "axios";
 import "./RegisterPage.css";
 const RegisterPage = () => {
   const [fullName, setFullName] = useState("");
@@ -13,22 +14,23 @@ const RegisterPage = () => {
     } else if (password.length < 5) {
       alert("please insert the password");
     } else {
-      //   try {
-      //     const res = await axios.post("http://localhost:5011/api/registerUser", {
-      //       email,
-      //       password,
-      //       fullName,
-      //     });
-      //     if (res.status == 200) {
-      //       alert("register successfully");
-      //       setEmail("");
-      //       setFullName("");
-      //       setPassword("");
-      //       navigate("/login");
-      //     }
-      //   } catch (err) {
-      //     console.log(err);
-      //   }
+        try {
+          const res = await axios.post("http://localhost:5005/api/register", {
+            email,
+            password,
+            fullName,
+          });
+          console.log(res.data);
+          if (res.status == 200) {
+            alert("register successfully");
+            setEmail("");
+            setFullName("");
+            setPassword("");
+            navigate("/login");
+          }
+        } catch (err) {
+          console.log(err);
+        }
     }
   };
 

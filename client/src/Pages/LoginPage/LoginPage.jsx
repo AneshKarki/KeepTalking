@@ -1,7 +1,8 @@
 // import React from "react";
 import "./LoginPage.css";
-import { useContext, useState } from "react";
+import { useState } from "react";
 import { Link, useNavigate } from "react-router-dom";
+import axios from "axios";
 
 const LoginPage = () => {
   // const { setToken } = useContext(AuthContext);
@@ -13,26 +14,30 @@ const LoginPage = () => {
     if (email.length < 0 || password.length < 0) {
       alert("please fill all the fields");
     } else {
-      // try {
-      //   const res = await axios.post("http://localhost:5011/api/loginUser", {
-      //     email,
-      //     password,
-      //   });
-      //   console.log(res);
-      //   if (res.status == 200) {
-      //     alert("login sucessfully");
-      //     localStorage.setItem("token", res.data.token);
-      //     setToken(res.data.token);
-      //     // Cookies.set("token", res.data.token, { expires: 7, path: "/" });
-      //     navigate("/");
-      //   } else {
-      //     alert("incorrect credintials");
-      //     setEmail("");
-      //     setPassword("");
-      //   }
-      // } catch (err) {
-      //   console.log(err);
-      // }
+      try {
+        const res = await axios.post(
+          "http://localhost:5005/api/login",
+          {
+            email,
+            password,
+          },
+          { withCredentials: true }
+        );
+        console.log(res);
+        if (res.status == 200) {
+          console.log(res.data.token);
+          alert("login sucessfully");
+          localStorage.setItem("token", res.data.token);
+          // setToken(res.data.token);
+          navigate("/");
+        } else {
+          alert("incorrect credintials");
+          setEmail("");
+          setPassword("");
+        }
+      } catch (err) {
+        console.log(err);
+      }
     }
   };
 
